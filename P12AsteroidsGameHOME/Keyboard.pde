@@ -9,6 +9,7 @@ void keyPressed() {
   if (keyCode == 'D') rightkey = true;
   if (keyCode == 'd') rightkey = true;
   if (key == ' ') spacekey = true;
+  if (key == 'R') rkey = true;
 }
 
 void keyReleased() {
@@ -22,4 +23,5 @@ void keyReleased() {
   if (keyCode == 'D') rightkey = false;
   if (keyCode == 'd') rightkey = false;
   if (key == ' ') spacekey = false;
+  if (key == 'R') rkey = false;
 }

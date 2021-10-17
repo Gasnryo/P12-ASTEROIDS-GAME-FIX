@@ -1,10 +1,12 @@
 class Ship extends GameObject {
 
   PVector dir;
-  int shotTimer, threshold;
+  int shotTimer, threshold, immunity, tpTimer;
 
   Ship() {
     lives = 3;
+    immunity = 0;
+    tpTimer = 0;
     loc = new PVector(width/2, height/2);
     vel = new PVector(0, 0);
     dir = new PVector(0, -0.1);
@@ -33,9 +35,6 @@ class Ship extends GameObject {
     if (vel.mag() > 5) vel.setMag(5);
     if (upkey == false) vel.setMag(vel.mag()*0.95);
 
-    shotTimer++;
-    immunity++;
-
     //move forward
     if (upkey) {
       vel.add(dir);
@@ -48,9 +47,20 @@ class Ship extends GameObject {
     if (downkey) vel.sub(dir);
     if (leftkey) dir.rotate(-radians(5));
     if (rightkey) dir.rotate(radians(5));
+    
+    //Shoot bullet
+    shotTimer++;
     if (spacekey && shotTimer >= threshold) {
       myObjects.add(new Bullet());
       shotTimer = 0;
+    }
+    
+    //teleport
+    tpTimer++;
+    if (rkey == true && tpTimer > 60) {
+     loc.set(random(0, width), random(0, height));
+     
+    
     }
 
     //Asteroid Collisions
@@ -65,6 +75,9 @@ class Ship extends GameObject {
       }//====
       i++;
     }//===
+    
+    //Immunity
+    immunity++;
     if (immunity < 15) {
       ship = #FF0004;
     } else if (immunity < 30) {
@@ -74,6 +87,7 @@ class Ship extends GameObject {
     } else if (immunity >= 60) {
       ship = #FFFFFF;
     }
+    
     //Game Over (Lose)
     if (lives == 0) {
       victory = false;

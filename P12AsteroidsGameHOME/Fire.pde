@@ -14,6 +14,8 @@ class Fire extends GameObject {
     nudge.rotate(PI);
     nudge.setMag(20);
     loc.add(nudge);
+    
+    //Fire effect
     vel = myShip.dir.copy();
     vel.rotate(PI+random(-0.3, 0.3));
     vel.setMag(random(0, 5));

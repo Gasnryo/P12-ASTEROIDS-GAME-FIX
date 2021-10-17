@@ -1,8 +1,6 @@
 void game() {
   //bg
   background(0);
-  
-  
 
   //spawn objects
   int i = 0;
@@ -22,7 +20,7 @@ void game() {
   //UFO
   
   counter++;
-  if (counter >= 180) {
+  if (counter >= 500) {
    myObjects.add(new UFO());
    counter = 0;
   }

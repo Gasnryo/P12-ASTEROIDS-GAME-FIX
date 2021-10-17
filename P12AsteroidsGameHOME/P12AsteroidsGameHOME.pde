@@ -27,15 +27,13 @@ boolean enlarge;
 PFont Origin;
 
 //variables
-boolean upkey, downkey, leftkey, rightkey, spacekey;
+boolean upkey, downkey, leftkey, rightkey, spacekey, rkey;
 Ship myShip;
 ArrayList<GameObject> myObjects;
 
 //Game Variables
 int AsteroidAmount;
 int AsteroidDeaths;
-
-int immunity;
 
 //gameover
 boolean victory;
@@ -75,8 +73,7 @@ void setup() {
   myObjects.add(myShip);
   
   //Game Setup
-  immunity = 0;
-  AsteroidAmount = 1;
+  AsteroidAmount = 7;
   int f = 0;
   while (f < AsteroidAmount) {
    myObjects.add(new Asteroid());

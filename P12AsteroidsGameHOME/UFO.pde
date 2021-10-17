@@ -3,7 +3,13 @@ class UFO extends GameObject {
   float move;
   int ufotime;
   
+  int vy = myShip.loc.y - loc.y;
+  int vx = myShip.loc.x - loc.x;
+  
  UFO() {
+   
+   myObjects.add(new UFOBullet(loc.x, loc.y, vx, vy));
+   
    lives = 1;
    move = random(-5, 5);
    ufotime = 0;
@@ -32,39 +38,44 @@ class UFO extends GameObject {
  void show() {
    fill(0, 255, 255);
    stroke(255);
-   square(loc.x, loc.y, 100);
+   circle(loc.x, loc.y, 50);
  }
  
  void act() {
    loc.add(vel);
     
-   if (loc.y < -50 && ufotime < 80) {
-     loc.y = height+50;
-   } else if (loc.y > height+50 && ufotime < 80) {
-     loc.y = -50;
-   } else if (loc.x < -50 && ufotime < 80) {
-     loc.x = width+50;
-   } else if (loc.x > width+50 && ufotime < 80) {
-     loc.x = -50;
-   } else if (loc.y < -50 && ufotime > 80) {
+    //the omega if statement (can loop around map edge if exists for under 80 frames, kills it if over 80)
+   if (loc.y < -25 && ufotime < 80) {
+     loc.y = height+25;
+   } else if (loc.y > height+25 && ufotime < 80) {
+     loc.y = -25;
+   } else if (loc.x < -25 && ufotime < 80) {
+     loc.x = width+25;
+   } else if (loc.x > width+25 && ufotime < 80) {
+     loc.x = -25;
+   } else if (loc.y < -25 && ufotime > 80) {
      lives = 0;
-   } else if (loc.y > height+50 && ufotime > 80) {
+   } else if (loc.y > height+25 && ufotime > 80) {
      lives = 0;
-   } else if (loc.x < -50 && ufotime > 80) {
+   } else if (loc.x < -25 && ufotime > 80) {
      lives = 0;
-   } else if (loc.x > width+50 && ufotime > 80) {
+   } else if (loc.x > width+25 && ufotime > 80) {
      lives = 0;
    }
    
-   //if (loc.y < -50) lives = 0;
-   //if (loc.y > height+50) lives = 0;
-   //if (loc.x < -50) lives = 0;
-   //if (loc.x > width+50) lives = 0;
+   //Bullet Collisions
+    int i = 0;
+    while (i < myObjects.size()) {//===
+      GameObject myObj = myObjects.get(i);
+      if (myObj instanceof Bullet) {//====
+        if (dist(loc.x, loc.y, myObj.loc.x, myObj.loc.y) <= 25+myObj.size) {//=====
+          myObj.lives = 0;
+          lives = 0; 
+        }//=====
+      }//====
+      i++;
+    }//===
    
    ufotime++;
-   //if (ufotime >= 132) {
-   // lives = 0; 
-   //}
-   println(ufotime);
  }
 }
