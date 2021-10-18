@@ -12,7 +12,7 @@ class Fire extends GameObject {
     //push fire back
     nudge = myShip.dir.copy();
     nudge.rotate(PI);
-    nudge.setMag(20);
+    nudge.setMag(65);
     loc.add(nudge);
     
     //Fire effect

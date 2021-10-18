@@ -25,17 +25,30 @@ void intro() {
     introtextsize--;
   }
 
-  //Asteroids/Framerate text
+  //Asteroids text
   textAlign(CENTER, CENTER);
   textFont(Origin);
   textSize(introtextsize);
   fill(lightblue);
   text("ASTEROIDS", width/2, height*0.4);
-  textSize(50);
-  text(int(frameRate), width*0.95, height*0.05);
+  
+  
+  //Controls
+  textAlign(LEFT, CENTER);
+  textSize(35);
+  fill(red);
+  text("W/A/S/D = MOVE",10, height*0.95);
+  text("SPACE    = SHOOT",10, height*0.9);
+  text("R            = TELEPORT",10, height*0.85);
+  text("F            = PAUSE",10, height*0.8);
 
   //Start Button
-  fill(255);
-  stroke(0);
+  strokeWeight(10);
+  if (dist(width/2, height*0.7, mouseX, mouseY) < 50) {
+  stroke(green);
+  } else {
+    stroke(red);
+  }
+  fill(purple);
   circle(width/2, height*0.7, 100);
 }

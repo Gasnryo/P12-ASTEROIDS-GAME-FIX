@@ -11,7 +11,7 @@ class UFOBullet extends GameObject {//START
   }
   
   void show() {
-    stroke(255, 0, 0);
+    stroke(orange);
     strokeWeight(4);
     noFill();
     circle(loc.x, loc.y, size);

@@ -2,13 +2,11 @@ class UFO extends GameObject {
   //Slowly moving sideways
   float move;
   int ufotime;
+  int ufobullettimer;
   
-  int vy = myShip.loc.y - loc.y;
-  int vx = myShip.loc.x - loc.x;
   
  UFO() {
    
-   myObjects.add(new UFOBullet(loc.x, loc.y, vx, vy));
    
    lives = 1;
    move = random(-5, 5);
@@ -36,12 +34,24 @@ class UFO extends GameObject {
  }
  
  void show() {
-   fill(0, 255, 255);
-   stroke(255);
+   fill(#B71417);
+   stroke(yellow);
    circle(loc.x, loc.y, 50);
  }
  
  void act() {
+   
+   //THE PROBLEM CHILDREN
+   
+   float vy = myShip.loc.y - loc.y;
+   float vx = myShip.loc.x - loc.x;
+   
+   ufobullettimer++;
+   if (ufobullettimer == 39) {
+   myObjects.add(new UFOBullet(loc.x, loc.y, vx, vy));
+   ufobullettimer = 0;
+   }
+   
    loc.add(vel);
     
     //the omega if statement (can loop around map edge if exists for under 80 frames, kills it if over 80)
@@ -70,7 +80,47 @@ class UFO extends GameObject {
       if (myObj instanceof Bullet) {//====
         if (dist(loc.x, loc.y, myObj.loc.x, myObj.loc.y) <= 25+myObj.size) {//=====
           myObj.lives = 0;
-          lives = 0; 
+          lives = 0;
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
+          myObjects.add(new Particle(loc.x, loc.y, red));
+          myObjects.add(new Particle(loc.x, loc.y, yellow));
         }//=====
       }//====
       i++;

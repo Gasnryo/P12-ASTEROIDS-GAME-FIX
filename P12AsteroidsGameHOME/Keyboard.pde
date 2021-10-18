@@ -10,6 +10,7 @@ void keyPressed() {
   if (keyCode == 'd') rightkey = true;
   if (key == ' ') spacekey = true;
   if (key == 'R') rkey = true;
+  if (key == 'F') fkey = true;
 }
 
 void keyReleased() {
@@ -24,4 +25,5 @@ void keyReleased() {
   if (keyCode == 'd') rightkey = false;
   if (key == ' ') spacekey = false;
   if (key == 'R') rkey = false;
+  if (key == 'F') fkey = false;
 }

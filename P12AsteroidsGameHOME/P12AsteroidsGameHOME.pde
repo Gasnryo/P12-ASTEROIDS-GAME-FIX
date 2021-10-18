@@ -11,13 +11,29 @@ final int gameover = 3;
 
 //Colors
 color ship;
+color ship2;
+
 
 color lightblue = #0064FF;
+color brown     = #552806;
+color white     = #FFFFFF;
+color darkblue  = #354EE5;
+color purple    = #C528DB;
+color red       = #FF0000;
+color green     = #3AFF00;
+color yellow    = #FFE308;
+color orange    = #FF7300;
+color cyan      = #00F4FF;
 
 //Intro Gif
 PImage[] asteroidgif;
 int numberOfFramesAsteroid;
 int fgif;
+
+//Gameover Gif
+PImage[] gameovergif;
+int GOGframes;
+int fgog;
 
 //intro text;
 int introtextsize;
@@ -27,8 +43,12 @@ boolean enlarge;
 PFont Origin;
 
 //variables
-boolean upkey, downkey, leftkey, rightkey, spacekey, rkey;
+boolean upkey, downkey, leftkey, rightkey, spacekey, rkey, fkey;
 Ship myShip;
+
+Star[] myStars;
+int numstars;
+
 ArrayList<GameObject> myObjects;
 
 //Game Variables
@@ -41,12 +61,19 @@ boolean victory;
 //UFO stuff
 int counter;
 
+int tpamount;
+
+
 
 
 void setup() {
   //Intro Gif
   numberOfFramesAsteroid = 50;
   asteroidgif = new PImage[numberOfFramesAsteroid];
+  
+  //gameover gif
+  GOGframes = 65;
+  gameovergif = new PImage[GOGframes];
   
   //Intro Text
   introtextsize = 100;
@@ -61,6 +88,12 @@ void setup() {
    i=i+1; 
   }
   
+  int X = 0;
+  while (X < GOGframes) {
+    gameovergif[X] = loadImage("frame_"+X+"_delay-0.14s.gif");
+   X=X+1; 
+  }
+  
   //basic setup
   mode = intro;
   size(800, 600, FX2D);
@@ -72,8 +105,20 @@ void setup() {
   myObjects = new ArrayList<GameObject>();
   myObjects.add(myShip);
   
+  //Stars
+  
+  numstars = 200;
+  myStars = new Star[numstars];
+  
+  int S = 0;
+  while (S < numstars) {
+    myStars[S] = new Star();
+    S++;
+  }
+  
   //Game Setup
-  AsteroidAmount = 7;
+  AsteroidAmount = 15;
+  AsteroidDeaths = 0;
   int f = 0;
   while (f < AsteroidAmount) {
    myObjects.add(new Asteroid());
@@ -85,6 +130,7 @@ void setup() {
   
   //ship color
   ship = #FFFFFF;
+  ship2 = cyan;
   
   //UFO
   counter = 0;
